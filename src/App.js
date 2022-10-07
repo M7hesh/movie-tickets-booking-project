@@ -1,38 +1,39 @@
 import React from "react";
-import Contact from "./Components/Contact";
+import MovieList from "./Components/MovieList";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-
-const CONTACT_DATA = [
+import PaymentSuccessfulPage from "./Components/PaymentSuccessfulPage";
+import TicketPayment from "./Components/TicketPayment";
+const MOVIES_DATA = [
   {
     imgPath: "./pushpa.jpg",
-    contactName: "Pushpa",
-    phone: "(212) 555-2345",
-    mail: "fluff@me.com",
+    movieName: "Pushpa: The Rise - Part 1",
+    genre: "Action, Adventure, Crime",
+    cast: "Allu Arjun, Rashmika Mandanna",
   },
   {
     imgPath: "./brahmastra.jpg",
-    contactName: "Brahmastra",
-    phone: "(0800) CAT KING",
-    mail: "pumpkin@scrimba.com",
+    movieName: "Brahmãstra Part 1: Shiva",
+    genre: "Action, Adventure, Fantasy",
+    cast: "Ranbir Kapoor, Alia Bhatt",
   },
   {
     imgPath: "./bahubali.jpg",
-    contactName: "Bahubali",
-    phone: "(0800) CAT KING",
-    mail: "pumpkin@scrimba.com",
+    movieName: "Bãhubali: The Beginning",
+    genre: "Action, Drama",
+    cast: "Prabhas, Rana Daggubati",
   },
   {
     imgPath: "./RRR.jpg",
-    contactName: "RRR",
-    phone: "(0800) CAT KING",
-    mail: "pumpkin@scrimba.com",
+    movieName: "RRR (Rise Roar Revolt)",
+    genre: "Action, Drama",
+    cast: "N.T.R, Ram Charan",
   },
   {
     imgPath: "./kgf2.jpg",
-    contactName: "KGF 2",
-    phone: "(212) 555-4567",
-    mail: "thecat@hotmail.com",
+    movieName: "K.G.F: Chapter 2",
+    genre: "Action, Crime, Drama",
+    cast: "Yash, Sunjay Dutt, Raveena Tondon",
   },
 ];
 
@@ -40,19 +41,21 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="contacts">
-        {CONTACT_DATA.map((contact) => {
-          const { imgPath, contactName, phone, mail } = contact;
+      {/* <div className="movies">
+        {MOVIES_DATA.map((movie) => {
+          const { imgPath, movieName, genre, cast } = movie;
           return (
-            <Contact
+            <MovieList
               imgPath={imgPath}
-              contactName={contactName}
-              phone={phone}
-              mail={mail}
+              movieName={movieName}
+              genre={genre}
+              cast={cast}
             />
           );
         })}
-      </div>
+      </div> */}
+      <TicketPayment />
+      {/* <PaymentSuccessfulPage /> */}
       <Footer />
     </>
   );

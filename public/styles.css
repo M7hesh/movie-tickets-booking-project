@@ -3,9 +3,9 @@
 }
 
 body {
+  width: 100%;
   margin: 0;
-  /* min-height: 100vh; */
-  display: flex;
+  min-height: 100vh;
   align-items: center;
   font-family: 'Inter', sans-serif;
   background-color: whitesmoke;
@@ -14,17 +14,18 @@ body {
 nav {
   height: 70px;
   display: flex;
-  /* background-color: blue; */
   padding: 20px 35px;
   box-shadow: 0px 2.98256px 7.4564px rgba(0,0,0,0.1);
 }
 
 .logo {
+  display: flex;
+  align-self: center;
   width:10%;
-  height: 120%;
+  height: 140%;
 }
 
-.contacts {
+.movies {
   margin-top: 40px;
   display: flex;
   justify-content: center;
@@ -32,28 +33,29 @@ nav {
   gap: 40px;
 }
 
-.contact-card {
+.movie-card {
   flex-basis: 225px;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   padding: 13px;
-  padding-bottom: 20px;
   background-color: white;
 }
 
-.contact-card > img {
+.movie-card > img {
   width: 100%;
   height: auto;
   align-self: center;
-  border-radius: 5px;
+  border-radius: 7px;
   object-fit: cover;
 }
 
-.contact-card > h3 {
-  font-weight: 700;
-  font-size: 18px;
+.movie-card > h3 {
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 0;
+  margin-top: 10px;
 }
 
 .info-group {
@@ -61,17 +63,65 @@ nav {
   align-items: center;
 }
 
-.info-group > img {
-  height: 11px;
-  margin-right: 8px;
-}
-
 .info-group > p {
-  margin-block: 3px;
+  margin-block: 2px;
   font-size: 12px;
   color: #2B283A;
 }
 
+.paymentSuccess {
+  margin: 50px 30%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.paymentSuccess > h2 {
+  color: green;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  margin: 5% 30%;
+  padding-top: 10px;
+  background-color: rgb(182, 199, 214);
+}
+
+form > input {
+  width: 80%;
+  height: 30px;
+  margin: 10px;
+}
+
+form > .formButtons {
+  margin: 15px;
+  margin-bottom: 20px;
+}
+
+form > .formButtons > button {
+  height: 25px;
+  width: 70px;
+  background-color: rgb(136, 174, 180);
+}
+
+#btn1 {
+  margin-left: 0;
+  margin-right: 70px;
+}
+
+#btn2 {
+  margin-right: 0;
+  margin-left: 70px;
+}
+
 footer {
-  text-align: center;
-  padding-top: 90px}
+  position:absolute;
+  bottom: 0;
+  color: #2B283A;
+}
