@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Form() {
   const [formData, setFormData] = React.useState({
@@ -83,10 +84,16 @@ export default function Form() {
           onChange={handleChange}
         />
         <div className="formButtons">
-          <button id="btn1" onClick={handleProceed}>
+          {/* <button id="btn1" onClick={handleProceed}>
             Proceed
           </button>
-          <button id="btn2">Back</button>
+          <button id="btn2">Back</button> */}
+          <Link to={"/booking"}>
+            <button id="btn1">Back</button>
+          </Link>
+          <Link to={"/paymentSuccessful"}>
+            <button id="btn2">Proceed</button>
+          </Link>
         </div>
       </form>
     </main>
