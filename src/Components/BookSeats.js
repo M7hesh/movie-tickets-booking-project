@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const BookSeats = () => {
   const [seatCount, setSeatCount] = useState(0);
   const [seatsBooked, setSeatsBooked] = useState([]);
-  const Location = useLocation();
-
-  const data = Location.state;
-  console.log(data);
+  const location = useLocation();
+  console.log(location);
+  const data = location.state;
+  // console.log(data);
+  const navigate = useNavigate();
 
   const handleSeat = (e) => {
     if (e.target.checked === true) {
@@ -18,12 +19,19 @@ const BookSeats = () => {
       seatsBooked.splice(seatsBooked.indexOf(e.target.id), 1);
     }
   };
+
+  const handleSeatsBooking = () => {
+    navigate("/payment", {
+      state: { ...data, seatCount, seatsBooked },
+    });
+  };
+
   console.log(seatCount, seatsBooked);
   // {imgPath: './RRR.jpg', movieName: 'RRR (Rise Roar Revolt)', genre: 'Action, Drama', cast: 'N.T.R, Ram Charan'}
   return (
     <div className="booking">
       <h2>{data.movieName}</h2>
-      <img id="movieImg" src={data.imgPath}></img>
+      <img id="movieImg" src={data.imgPath} alt="movie poster"></img>
       <p>All eyes this way please!</p>
       <img
         id="theatreScreen"
@@ -101,9 +109,17 @@ const BookSeats = () => {
         <Link to={"/"}>
           <button className="bookingBackBtn">Back</button>
         </Link>
-        <Link to={"/payment"}>
-          <button className="bookingProccedBtn">Proceed</button>
-        </Link>
+        {/* <Link to={"/payment"}>
+          <button
+            className="bookingProccedBtn"
+            state={{ data, seatCount, seatsBooked }}
+          >
+            Proceed
+          </button>
+        </Link> */}
+        <button className="bookingProccedBtn" onClick={handleSeatsBooking}>
+          Proceed
+        </button>
       </div>
     </div>
   );

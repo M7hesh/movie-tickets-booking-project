@@ -108,10 +108,24 @@ form {
   background-color: rgb(182, 199, 214);
 }
 
-form > input {
-  width: 80%;
+form > label {
+  padding-top: 10px;
+}
+
+form > div > input {
   height: 30px;
-  margin: 10px;
+  width: 300px;
+  margin-top: 10px;
+}
+
+form > div > span {
+  color: red;
+}
+
+form > div > p {
+  color: red;
+  margin: 0;
+  font-size: small;
 }
 
 form > .formButtons {

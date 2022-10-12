@@ -1,8 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MovieList = (props) => {
   const { imgPath, movieName, genre, cast, index } = props;
+  const navigate = useNavigate();
+  const handleBooking = () => {
+    navigate("/booking", { state: { imgPath, movieName, genre, cast } });
+  };
   // add keys later
   return (
     <div className="movie-card">
@@ -14,11 +18,14 @@ const MovieList = (props) => {
       <div className="info-group">
         <p>{cast}</p>
       </div>
-      <Link to={"/booking"} state={{ imgPath, movieName, genre, cast }}>
+      {/* <Link to={"/booking"} state={{ imgPath, movieName, genre, cast }}>
         <button id="bookBtn">
           <strong>Book</strong>
         </button>
-      </Link>
+      </Link> */}
+      <button id="bookBtn" onClick={handleBooking}>
+        <strong>Book</strong>
+      </button>
     </div>
   );
 };
