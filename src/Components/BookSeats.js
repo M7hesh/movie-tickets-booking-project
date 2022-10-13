@@ -38,8 +38,6 @@ const BookSeats = () => {
     }
   };
 
-  console.log(seatCount, seatsBooked);
-  // {imgPath: './RRR.jpg', movieName: 'RRR (Rise Roar Revolt)', genre: 'Action, Drama', cast: 'N.T.R, Ram Charan'}
   return (
     <div className="booking">
       <h2>{data.movieName}</h2>
@@ -297,14 +295,6 @@ const BookSeats = () => {
         <Link to={"/"}>
           <button className="bookingBackBtn">Back</button>
         </Link>
-        {/* <Link to={"/payment"}>
-          <button
-            className="bookingProccedBtn"
-            state={{ data, seatCount, seatsBooked }}
-          >
-            Proceed
-          </button>
-        </Link> */}
         <button className="bookingProccedBtn" onClick={handleSeatsBooking}>
           Proceed
         </button>

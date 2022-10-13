@@ -14,7 +14,6 @@ const HomePage = () => {
             movieName={movieName}
             genre={genre}
             cast={cast}
-            index={index}
             cost={cost}
           />
         );

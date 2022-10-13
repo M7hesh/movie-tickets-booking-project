@@ -8,6 +8,7 @@ export default function Form() {
     phone: "",
     creditCard: "",
     cvv: "",
+    nameOnCard: "",
   });
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(false);
@@ -17,27 +18,9 @@ export default function Form() {
   const navigate = useNavigate();
   const Location = useLocation();
   const data = Location.state;
-  console.log(data);
 
-  //   {
-  //     "imgPath": "./brahmastra.jpg",
-  //     "movieName": "Brahmãstra Part 1: Shiva",
-  //     "genre": "Action, Adventure, Fantasy",
-  //     "cast": "Ranbir Kapoor, Alia Bhatt",
-  //     "seatCount": 2,
-  //     "seatsBooked": [
-  //         "A3",
-  //         "C3"
-  //     ]
-  // }
-
-  const { email, name, phone, creditCard, cvv } = formData;
-  let seatsBookedString = "";
-  // data.seatsBooked.forEach((seat) => {
-  // console.log("aaaaa", seat);
-  seatsBookedString = data.seatsBooked.toString();
-  // });
-  console.log("aaaaa", seatsBookedString);
+  const { email, name, phone, creditCard, cvv, nameOnCard } = formData;
+  let seatsBookedString = data.seatsBooked.toString();
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -45,11 +28,11 @@ export default function Form() {
     setFormData((prevState) => {
       return { ...prevState, [name]: type === "checkbox" ? checked : value };
     });
-    if (email && name && phone && creditCard && cvv) {
+    if (email && name && phone && creditCard && cvv && nameOnCard) {
       document.getElementById("proceedError").innerHTML = "";
     }
 
-    // validations
+    // validation
     if (value === "" || value === null) {
       document.getElementById(
         `${name}Error`
@@ -110,7 +93,7 @@ export default function Form() {
 
   const handlePaymentProceed = (e) => {
     e.preventDefault();
-    if (!(email && name && phone && creditCard && cvv)) {
+    if (!(email && name && phone && creditCard && cvv && nameOnCard)) {
       document.getElementById("proceedError").innerHTML =
         "Please fill all the fields!";
     } else if (
@@ -136,8 +119,7 @@ export default function Form() {
           <strong>Customer Details</strong>
         </label>
 
-        <div className="formField">
-          <label>Name:</label>
+        <div>
           <input
             name="name"
             type="text"
@@ -146,11 +128,11 @@ export default function Form() {
             onChange={handleChange}
           />
           <span>*</span>
+          <p></p>
           <p id="nameError"></p>
         </div>
 
-        <div className="formField">
-          <label>Contact:</label>
+        <div>
           <input
             name="phone"
             type="text"
@@ -164,8 +146,7 @@ export default function Form() {
           <p id="phoneError"></p>
         </div>
 
-        <div className="formField">
-          <label>Email:</label>
+        <div>
           <input
             name="email"
             type="text"
@@ -184,18 +165,32 @@ export default function Form() {
         </label>
 
         <div className="formField">
-          <label>Amount:</label>
+          <label>Total Amount:</label>
           <input
             name="cost"
             type="text"
             value={`Rs. ${data.cost * data.seatCount}.00`}
             disabled
-            style={{ color: "red", marginRight: "6%" }}
           />
+          {/* <label>Expiry date (MM/YY):</label>
+          <input name="expiryDate" type="month" onChange={handleChange}></input>
+          <span>*</span>
+          <p id="expiryDateError"></p> */}
         </div>
 
-        <div className="formField">
-          <label>Credit Card:</label>
+        <div>
+          <input
+            name="nameOnCard"
+            type="text"
+            placeholder="Name on card"
+            value={nameOnCard}
+            onChange={handleChange}
+          />
+          <span>*</span>
+          <p id="nameOnCardError"></p>
+        </div>
+
+        <div>
           <input
             name="creditCard"
             type="text"
@@ -204,14 +199,12 @@ export default function Form() {
             onChange={handleChange}
             onBlur={handleVisaCreditCardValidation}
             onPointerLeave={handleVisaCreditCardValidation}
-            style={{ marginLeft: "-5%" }}
           />
           <span>*</span>
           <p id="creditCardError"></p>
         </div>
 
-        <div className="formField">
-          <label>CVV:</label>
+        <div>
           <input
             name="cvv"
             type="password"
@@ -221,7 +214,7 @@ export default function Form() {
             onBlur={handleCvvValidation}
             onPointerLeave={handleCvvValidation}
             minLength={3}
-            maxLength={3}
+            maxLength={4}
           />
           <span>*</span>
           <p id="cvvError"></p>
@@ -230,9 +223,6 @@ export default function Form() {
         <p id="proceedError"></p>
 
         <div className="formButtons">
-          {/* <Link to={"/booking"} state={{ data }}>
-            <button id="btn1">Back</button>
-          </Link> */}
           <button
             id="btn1"
             type="button"
