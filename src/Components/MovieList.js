@@ -2,10 +2,10 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const MovieList = (props) => {
-  const { imgPath, movieName, genre, cast, index } = props;
+  const { imgPath, movieName, genre, cast, cost, index } = props;
   const navigate = useNavigate();
   const handleBooking = () => {
-    navigate("/booking", { state: { imgPath, movieName, genre, cast } });
+    navigate("/booking", { state: { imgPath, movieName, genre, cast, cost } });
   };
   // add keys later
   return (

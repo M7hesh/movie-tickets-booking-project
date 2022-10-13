@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <div className="movies">
       {MOVIES_DATA.map((movie, index) => {
-        const { imgPath, movieName, genre, cast } = movie;
+        const { imgPath, movieName, genre, cast, cost } = movie;
         return (
           <MovieList
             imgPath={imgPath}
@@ -15,6 +15,7 @@ const HomePage = () => {
             genre={genre}
             cast={cast}
             index={index}
+            cost={cost}
           />
         );
       })}
