@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const BookSeats = () => {
   const [seatCount, setSeatCount] = useState(0);
   const [seatsBooked, setSeatsBooked] = useState([]);
+  const [proceed, setProceed] = useState(false);
   const location = useLocation();
   console.log(location);
   const data = location.state;
@@ -14,6 +15,7 @@ const BookSeats = () => {
     if (e.target.checked === true) {
       setSeatCount(seatCount + 1);
       seatsBooked.push(e.target.id);
+      document.getElementById("proceedError").innerHTML = "";
     } else {
       setSeatCount(seatCount - 1);
       seatsBooked.splice(seatsBooked.indexOf(e.target.id), 1);
@@ -21,9 +23,14 @@ const BookSeats = () => {
   };
 
   const handleSeatsBooking = () => {
-    navigate("/payment", {
-      state: { ...data, seatCount, seatsBooked },
-    });
+    if (seatCount) {
+      navigate("/payment", {
+        state: { ...data, seatCount, seatsBooked },
+      });
+    } else {
+      document.getElementById("proceedError").innerHTML =
+        "Please book atleast 1 seat!";
+    }
   };
 
   console.log(seatCount, seatsBooked);
@@ -104,6 +111,7 @@ const BookSeats = () => {
           6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </small>
+        <p id="proceedError" style={{ color: "red", margin: "4px" }}></p>
       </div>
       <div className="bookingBtn">
         <Link to={"/"}>

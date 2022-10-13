@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Form() {
   const [formData, setFormData] = React.useState({
@@ -9,7 +9,11 @@ export default function Form() {
     creditCard: "",
     cvv: "",
   });
-  const [proceed, setProceed] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPhoneValid, setIsPhoneValid] = useState(false);
+  const [isCreditCardValid, setIsCreditCardValid] = useState(false);
+  const [isCvvValid, setIsCvvValid] = useState(false);
+
   const navigate = useNavigate();
   const Location = useLocation();
   const data = Location.state;
@@ -17,25 +21,21 @@ export default function Form() {
 
   const { email, name, phone, creditCard, cvv } = formData;
 
-  // if (email && name && phone && creditCard && cvv) {
-  //   setProceed(true);
-  // }
-
-  // email && name && phone && creditCard && cvv && setProceed(true);
-
   const handleChange = (event) => {
     event.preventDefault();
     const { name, type, value, checked, placeholder } = event.target;
     setFormData((prevState) => {
       return { ...prevState, [name]: type === "checkbox" ? checked : value };
     });
+    if (email && name && phone && creditCard && cvv) {
+      document.getElementById("proceedError").innerHTML = "";
+    }
 
     // validations
     if (value === "" || value === null) {
       document.getElementById(
         `${name}Error`
       ).innerHTML = `${placeholder} is a required field`;
-      setProceed(false);
     } else {
       document.getElementById(`${name}Error`).innerHTML = "";
     }
@@ -46,43 +46,63 @@ export default function Form() {
     const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (!e.target.value.match(mailformat) && e.target.value) {
       document.getElementById(`emailError`).innerHTML = `Invalid Email Id!`;
-      setProceed(false);
+      setIsEmailValid(false);
+    } else {
+      setIsEmailValid(true);
     }
   };
 
   const handleVisaCreditCardValidation = (e) => {
     e.preventDefault();
     // Visa card starts with 4, length 13 or 16 digits
-    const cardNo = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-    if (!e.target.value.match(cardNo) && e.target.value) {
+    const cardNoRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+    if (!e.target.value.match(cardNoRegex) && e.target.value) {
       document.getElementById(
         `creditCardError`
-      ).innerHTML = `Not a valid Visa credit card number!`;
-      setProceed(false);
+      ).innerHTML = `Invalid Visa credit card number!`;
+      setIsCreditCardValid(false);
+    } else {
+      setIsCreditCardValid(true);
     }
   };
 
   const handlePhoneNumberValidation = (e) => {
     e.preventDefault();
-    var phoneNo = /^\d{10}$/;
-    if (!e.target.value.match(phoneNo) && e.target.value) {
-      document.getElementById(
-        `phoneError`
-      ).innerHTML = `Not a valid Phone number!`;
-      setProceed(false);
+    const phoneNoRegex = /^\d{10}$/;
+    if (!e.target.value.match(phoneNoRegex) && e.target.value) {
+      document.getElementById(`phoneError`).innerHTML = `Invalid Phone number!`;
+      setIsPhoneValid(false);
+    } else {
+      setIsPhoneValid(true);
     }
   };
 
-  const handleProceed = (event) => {
-    event.preventDefault();
-    // if (formData.password === formData.confirmPassword) {
-    //   console.log("Successfully signed up");
-    //   if (formData.isNewsletter) {
-    //     console.log("Thanks for signing up for our newsletter");
-    //   }
-    // } else {
-    //   console.log("Passwords do not match");
-    // }
+  const handleCvvValidation = (e) => {
+    e.preventDefault();
+    // [0-9] represents the digit between 0-9.
+    // {3, 4} represents the string has 3 or 4 digits.
+    const cvvRegex = /^[0-9]{3,4}$/;
+    if (!e.target.value.match(cvvRegex) && e.target.value) {
+      document.getElementById(`cvvError`).innerHTML = `Invalid CVV!`;
+      setIsCvvValid(false);
+    } else {
+      setIsCvvValid(true);
+    }
+  };
+
+  const handlePaymentProceed = (e) => {
+    e.preventDefault();
+    if (!(email && name && phone && creditCard && cvv)) {
+      document.getElementById("proceedError").innerHTML =
+        "Please fill all the fields!";
+    } else if (
+      !(isCreditCardValid && isEmailValid && isPhoneValid && isCvvValid)
+    ) {
+      document.getElementById("proceedError").innerHTML =
+        "Please fill all the fields correctly!";
+    } else {
+      navigate("/paymentSuccessful", { state: { ...data, ...formData } });
+    }
   };
 
   return (
@@ -101,7 +121,7 @@ export default function Form() {
             onChange={handleChange}
           />
           <span>*</span>
-          <p id="nameError" style={{ display: "block" }}></p>
+          <p id="nameError"></p>
         </div>
 
         <div>
@@ -112,9 +132,10 @@ export default function Form() {
             value={phone}
             onChange={handleChange}
             onBlur={handlePhoneNumberValidation}
+            onPointerLeave={handlePhoneNumberValidation}
           />
           <span>*</span>
-          <p id="phoneError" style={{ display: "block" }}></p>
+          <p id="phoneError"></p>
         </div>
 
         <div>
@@ -125,9 +146,10 @@ export default function Form() {
             value={email}
             onChange={handleChange}
             onBlur={handleEmailValidation}
+            onPointerLeave={handleEmailValidation}
           />
           <span>*</span>
-          <p id="emailError" style={{ display: "block" }}></p>
+          <p id="emailError"></p>
         </div>
 
         <label>
@@ -142,9 +164,10 @@ export default function Form() {
             value={creditCard}
             onChange={handleChange}
             onBlur={handleVisaCreditCardValidation}
+            onPointerLeave={handleVisaCreditCardValidation}
           />
           <span>*</span>
-          <p id="creditCardError" style={{ display: "block" }}></p>
+          <p id="creditCardError"></p>
         </div>
 
         <div>
@@ -154,18 +177,18 @@ export default function Form() {
             placeholder="CVV"
             value={cvv}
             onChange={handleChange}
+            onBlur={handleCvvValidation}
+            onPointerLeave={handleCvvValidation}
             minLength={3}
             maxLength={3}
           />
           <span>*</span>
-          <p id="cvvError" style={{ display: "block" }}></p>
+          <p id="cvvError"></p>
         </div>
 
+        <p id="proceedError"></p>
+
         <div className="formButtons">
-          {/* <button id="btn1" onClick={handleProceed}>
-            Proceed
-          </button>
-          <button id="btn2">Back</button> */}
           {/* <Link to={"/booking"} state={{ data }}>
             <button id="btn1">Back</button>
           </Link> */}
@@ -175,11 +198,9 @@ export default function Form() {
           >
             Back
           </button>
-          <Link to={"/paymentSuccessful"}>
-            <button id="btn2" disabled={!proceed}>
-              Proceed
-            </button>
-          </Link>
+          <button id="btn2" onClick={handlePaymentProceed}>
+            Proceed
+          </button>
         </div>
       </form>
     </main>

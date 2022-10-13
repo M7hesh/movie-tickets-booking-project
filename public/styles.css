@@ -108,13 +108,18 @@ form {
   background-color: rgb(182, 199, 214);
 }
 
+form > div {
+  width: 100%;
+}
+
 form > label {
   padding-top: 10px;
 }
 
 form > div > input {
   height: 30px;
-  width: 300px;
+  width: 90%;
+  margin-left: 5%;
   margin-top: 10px;
 }
 
@@ -122,16 +127,23 @@ form > div > span {
   color: red;
 }
 
-form > div > p {
+form > div > p, form > p {
   color: red;
   margin: 0;
   font-size: small;
+  display: flex;
+}
+
+form > div > p {
+  margin-left: 5%;
 }
 
 form > .formButtons {
   margin-top: 15px;
   margin-bottom: 20px;
-  display: inline-block;
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
 }
 
 #btn1, #btn2, .bookingProccedBtn, .bookingBackBtn, #paymentSuccessBtnId {
@@ -187,7 +199,6 @@ small {
 .bookingBtn {
   display: flex;
   align-self: center;
-  margin-top: 20px;
 }
 
 .bookingBackBtn {
