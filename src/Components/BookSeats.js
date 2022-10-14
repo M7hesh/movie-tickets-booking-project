@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const BookSeats = () => {
+  const location = useLocation();
+  const data = location.state;
+
+  const navigate = useNavigate();
   const [seatCount, setSeatCount] = useState(0);
   const [seatsBooked, setSeatsBooked] = useState([]);
   const [seatsPreBooked, setPreSeatsBooked] = useState([
@@ -10,11 +14,8 @@ const BookSeats = () => {
     "E4",
     "E5",
   ]);
-  const location = useLocation();
-  // console.log(location);
-  const data = location.state;
-  console.log("hiii", data);
-  const navigate = useNavigate();
+  const [date, setDate] = useState("14th Oct, 22");
+  const [time, setTime] = useState("9.00 am");
 
   const handleSeat = (e) => {
     if (e.target.checked === true) {
@@ -30,11 +31,22 @@ const BookSeats = () => {
   const handleSeatsBooking = () => {
     if (seatCount) {
       navigate("/payment", {
-        state: { ...data, seatCount, seatsBooked },
+        state: { ...data, seatCount, seatsBooked, date, time },
       });
     } else {
       document.getElementById("proceedError").innerHTML =
         "Please book atleast 1 seat!";
+    }
+  };
+  console.log(date, time);
+
+  const handleDateTime = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    if (name === "date") {
+      setDate(value);
+    } else {
+      setTime(value);
     }
   };
 
@@ -42,6 +54,23 @@ const BookSeats = () => {
     <div className="booking">
       <h2>{data.movieName}</h2>
       <img id="movieImg" src={data.imgPath} alt="movie poster"></img>
+      <div className="dateTime">
+        <label>Date: </label>
+        <select name="date" id="date" onChange={handleDateTime}>
+          <option value="14th Oct, 22">14th Oct, 22</option>
+          <option value="15th Oct, 22">15th Oct, 22</option>
+          <option value="16th Oct, 22">16th Oct, 22</option>
+          <option value="17th Oct, 22">17th Oct, 22</option>
+        </select>
+        <label>Time: </label>
+        <select name="time" id="time" onChange={handleDateTime}>
+          <option value="9.00 am">9.00 am</option>
+          <option value="1.00 pm">1.00 pm</option>
+          <option value="4.00 pm">4.00 pm</option>
+          <option value="8.00pm">8.00pm</option>
+        </select>
+      </div>
+
       <p>
         ₹<strong> {data.cost}.00</strong>/seat (including GST)
       </p>

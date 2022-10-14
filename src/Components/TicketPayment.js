@@ -113,6 +113,9 @@ export default function Form() {
         <h3>
           Seats selected: {data.seatCount} ({seatsBookedString})
         </h3>
+        <h3>
+          Date & Time: {data.date} {data.time}
+        </h3>
       </div>
       <form>
         <label>
@@ -126,6 +129,7 @@ export default function Form() {
             placeholder="Name"
             value={name}
             onChange={handleChange}
+            maxLength={30}
           />
           <span>*</span>
           <p></p>
@@ -138,6 +142,7 @@ export default function Form() {
             type="text"
             placeholder="Phone number"
             value={phone}
+            maxLength={10}
             onChange={handleChange}
             onBlur={handlePhoneNumberValidation}
             onPointerLeave={handlePhoneNumberValidation}
@@ -151,6 +156,7 @@ export default function Form() {
             name="email"
             type="text"
             placeholder="Email address"
+            maxLength={30}
             value={email}
             onChange={handleChange}
             onBlur={handleEmailValidation}
@@ -172,10 +178,6 @@ export default function Form() {
             value={`Rs. ${data.cost * data.seatCount}.00`}
             disabled
           />
-          {/* <label>Expiry date (MM/YY):</label>
-          <input name="expiryDate" type="month" onChange={handleChange}></input>
-          <span>*</span>
-          <p id="expiryDateError"></p> */}
         </div>
 
         <div>
@@ -183,6 +185,7 @@ export default function Form() {
             name="nameOnCard"
             type="text"
             placeholder="Name on card"
+            maxLength={30}
             value={nameOnCard}
             onChange={handleChange}
           />
@@ -196,6 +199,7 @@ export default function Form() {
             type="text"
             placeholder="Credit card number"
             value={creditCard}
+            maxLength={16}
             onChange={handleChange}
             onBlur={handleVisaCreditCardValidation}
             onPointerLeave={handleVisaCreditCardValidation}

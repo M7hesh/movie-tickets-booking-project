@@ -265,6 +265,19 @@ small {
   flex-direction: column;
 }
 
+.booking > .dateTime {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.booking > .dateTime > label, .booking > .dateTime > select {
+  margin-right: 5px;
+  font-size: small;
+}
+
 #paymentSuccessBtnId {
   display: flex;
   align-self: center;

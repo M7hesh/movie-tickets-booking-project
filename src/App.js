@@ -27,7 +27,7 @@ function App() {
           <Route path="*" element={<NoPage />} />
         </Routes>
       </BrowserRouter>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

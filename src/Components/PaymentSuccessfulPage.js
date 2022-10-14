@@ -24,6 +24,11 @@ const PaymentSuccessfulPage = () => {
         <br></br>
         Seats: <strong>{data.seatsBooked.toString()}</strong>
         <br></br>
+        Date & Time:
+        <strong>
+          {data.date} {data.time}
+        </strong>
+        <br></br>
         Amount paid: <strong>Rs. {data.cost * data.seatCount}.00</strong>
       </p>
       <div id="paymentSuccessBtn">
