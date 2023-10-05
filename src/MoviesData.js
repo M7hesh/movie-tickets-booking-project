@@ -34,6 +34,13 @@ const MOVIES_DATA = [
     cast: "Yash, Sunjay Dutt, Raveena Tondon",
     cost: 200,
   },
+    {
+    imgPath: "./Interstellar.jpg",
+    movieName: "Interstellar (2014)",
+    genre: "Sci-fi/Adventure",
+    cast: "Matthew McConaughey, Jessica Chastain, Anne Hathaway",
+    cost: 575,
+  }
 ];
 
 export default MOVIES_DATA;
