@@ -34,6 +34,20 @@ const MOVIES_DATA = [
     cast: "Yash, Sunjay Dutt, Raveena Tondon",
     cost: 200,
   },
+    {
+    imgPath: "./Interstellar.jpg",
+    movieName: "Interstellar (2014)",
+    genre: "Sci-fi/Adventure",
+    cast: "Matthew McConaughey, Jessica Chastain, Anne Hathaway",
+    cost: 575,
+  },
+      {
+    imgPath: "./endgame.jpg",
+    movieName: "Avenger: Endgame (2019)",
+    genre: "Sci-fi/Adventure",
+    cast: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
+    cost: 600,
+  }
 ];
 
 export default MOVIES_DATA;
