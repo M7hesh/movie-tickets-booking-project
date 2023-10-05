@@ -40,6 +40,13 @@ const MOVIES_DATA = [
     genre: "Sci-fi/Adventure",
     cast: "Matthew McConaughey, Jessica Chastain, Anne Hathaway",
     cost: 575,
+  },
+      {
+    imgPath: "./endgame.jpg",
+    movieName: "Avenger: Endgame (2019)",
+    genre: "Sci-fi/Adventure",
+    cast: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
+    cost: 600,
   }
 ];
 
