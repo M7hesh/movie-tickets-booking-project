@@ -47,6 +47,13 @@ const MOVIES_DATA = [
     genre: "Sci-fi/Adventure",
     cast: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
     cost: 600,
+  },
+  {
+    imgPath: "./oppenheimer.jpg",
+    movieName: "Oppenheimer (2023)",
+    genre: "Biopic/Drama",
+    cast: "Cillian Murphy, Emily Blunt, Matt Damon",
+    cost: 986,
   }
 ];
 
