@@ -54,6 +54,13 @@ const MOVIES_DATA = [
     genre: "Biopic/Drama",
     cast: "Cillian Murphy, Emily Blunt, Matt Damon",
     cost: 986,
+  },
+    {
+    imgPath: "./Barbie.jpg",
+    movieName: "Barbie (2023)",
+    genre: "Comedy/Fantasy",
+    cast: "Margot Robbie, Ryan Gosling",
+    cost: 400,
   }
 ];
 
